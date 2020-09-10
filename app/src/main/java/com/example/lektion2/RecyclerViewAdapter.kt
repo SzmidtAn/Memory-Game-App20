@@ -1,6 +1,5 @@
 package com.example.lektion2
 
-import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.view.LayoutInflater
@@ -9,9 +8,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlin.coroutines.coroutineContext
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(animals: MutableList<Element>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+
+
+
+
+    private var products: MutableList<Element>? = animals
+    val checkElements: MutableList<Element> = ArrayList(2)
+    var element1 : Element? =null
+    var element2 : Element? =null
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.element_recycle_view, parent, false)
         return ViewHolder(view)
@@ -34,7 +44,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun getItemCount(): Int {
-        return 9
+        return 12
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -42,39 +52,87 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 
 
 
-        var b:Boolean=false
-    holder.imageElement.setImageResource(R.mipmap.ic_launcher_round)
+        var element= products?.get(position)
+        element!!.elementId=position
+        holder.imageElement.setImageResource(R.mipmap.card_back)
 
 
-        var i= R.mipmap.ic_launcher
+
+
 
         holder.imageElement.setOnClickListener{
 
-        i=R.mipmap.apple
-        holder.imageElement.setImageResource(i)
+checkElements.add(element!!)
 
-            if (checkIfElementsSame(position)){
-                println("Grattir you are the vinner")
-            }else
+
+
+            Glide.with(holder.imageElement.getContext())
+                .asBitmap()
+                .load(element?.imageString)
+                .centerCrop()
+                .into(holder.imageElement)
+
+
+
+
+            if (checkElements.size > 1){
+
+            element1= checkElements[0]
+                element2= checkElements[1]
+
+
+
+        if (checkIfElementsSame(element1!!, element2!!, position)){
+            println("Grattis you are the vinner")
+            element1!!.ifFind=true
+            element2!!.ifFind=true
+
+
+
+
+
+
+        }else
             Handler().postDelayed({
-                holder.imageElement.setImageResource(R.mipmap.ic_launcher_round)
+                holder.imageElement.setImageResource(R.mipmap.card_back)
+                bindViewHolder(holder, 2)
+
             }, 1000)
 
+            checkElements.clear()
+            }
 
+
+            checkIfVinner(this!!.products!!)
 
     }
-    }
 
+        }
 
 }
 
 
-fun checkIfElementsSame(position: Int): Boolean{
+fun checkIfElementsSame(element1: Element,element2: Element, position: Int): Boolean{
 
-    if (position==5){
+    if (element1.imageString.toString() == element2.imageString.toString()){
         return true
     }else{
 return false
     }
+}
+
+fun checkIfVinner(list:MutableList<Element>){
+    var a=0
+    for (i in list){
+        if (i.ifFind == true){
+            a++
+        }
+    }
+
+    if (a == 9){
+        println("wygrana")
+    }
+
+
 }
 
