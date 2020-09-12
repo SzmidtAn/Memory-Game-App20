@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lektion2.RecyclerViewAdapter.ViewHolder
 import kotlinx.android.synthetic.main.element_recycle_view.view.*
-import kotlin.collections.ArrayList
 
 
 var gamesPoints:Int=0
@@ -31,6 +30,7 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, animals: MutableList<Ele
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.element_recycle_view, parent, false)
+
 
 
         return ViewHolder(view)
@@ -86,7 +86,12 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, animals: MutableList<Ele
 
                 if (checkElements.size == 2) {
 
+
+
                     gamesPoints++
+                  var ma=MainActivity()
+
+                    countPoints()
 
                     element1 = checkElements[0]
                     element2 = checkElements[1]
@@ -126,6 +131,7 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, animals: MutableList<Ele
 
                 if (checkIfVinner(this.products!!)) {
                     showDialog(context)
+
                 }
 
             }
@@ -153,18 +159,21 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, animals: MutableList<Ele
     }
 
     private fun showDialog(context: Context) {
-        val builder = AlertDialog.Builder(context)
+val builder = AlertDialog.Builder(context)
         builder.setMessage("Potrzebowałeś $gamesPoints ruchów, aby ukończyć rundę.\n\nNiezła robota!")
 
         builder.setTitle("Gratulacje!")
         builder.setIcon(R.mipmap.fruit)
         builder.setCancelable(false)
+        builder.setView(R.layout.dialog_vin)
         builder.setNegativeButton("Graj dalej") { dialogInterface, i ->
             val mIntent = Intent(context, MainActivity::class.java)
             context.startActivity(mIntent)
         }
         gamesPoints=0
         builder.create().show()
+
+
     }
 
 

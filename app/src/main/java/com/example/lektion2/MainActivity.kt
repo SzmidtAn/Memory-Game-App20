@@ -1,21 +1,21 @@
 package com.example.lektion2
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.lektion2.RecyclerViewAdapter.ViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import java.util.Collections.shuffle
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity() {
+    var textPoint: TextView? =null
 
-    var inpoin: Int = 0
+class MainActivity : AppCompatActivity() {
 
     private val listOfElements = listOf(
         Element(R.mipmap.orange, (1..9).random()),
@@ -39,8 +39,10 @@ class MainActivity : AppCompatActivity() {
 
 
         resumeButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            showDialog(this)
+            gamesPoints=0
+
+
         }
 
 
@@ -53,8 +55,6 @@ class MainActivity : AppCompatActivity() {
             animals.add(animal)
         }
 
-
-
         shuffle(listOfElements)
 
         elementsRecyclerView.apply {
@@ -63,22 +63,46 @@ class MainActivity : AppCompatActivity() {
                 RecyclerViewAdapter(elementsRecyclerView, listOfElements as MutableList<Element>)
         }
 
-        point()
+        textPoint= findViewById<TextView>(R.id.pointsTextView)
+        countPoints()
 
     }
 
-
-    fun point() {
-        inpoin++
-
-        val bundle = intent.extras
-        var samplename: String = "a"
-        if (bundle != null) {
-
-            samplename = intent.getStringExtra("point").toString()
-
-        }
-
+    override fun onBackPressed() {
+        val mIntent = Intent(this, HomeActivity::class.java)
+        startActivity(mIntent)
     }
+
+
 
 }
+
+    @SuppressLint("SetTextI18n")
+    fun countPoints(){
+        textPoint!!.text= "Liczba ruchów: $gamesPoints"
+}
+
+
+
+private fun showDialog(context: Context) {
+    val builder = AlertDialog.Builder(context)
+    builder.setMessage("\nJesteś pewny, że chcesz zakończyć grę?")
+    builder.setTitle("PAUSE")
+    builder.setIcon(R.mipmap.fruit)
+    builder.setCancelable(false)
+    builder.setView(R.layout.dialog_vin)
+    builder.setCancelable(true)
+    builder.setNegativeButton("Graj dalej"){dialogInterface, i ->
+
+    }
+    builder.setPositiveButton("Idż do menu") { dialogInterface, i ->
+        val mIntent = Intent(context, HomeActivity::class.java)
+        context.startActivity(mIntent)
+    }
+    gamesPoints=0
+    builder.create().show()
+
+
+}
+
+
