@@ -1,12 +1,15 @@
 package com.example.lektion2
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.home_activity.*
+import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_activity.questButton as questButton1
+import kotlinx.android.synthetic.main.home_fragment.quickGamebutton as quickGamebutton1
 
 class HomeActivity : AppCompatActivity() {
 
@@ -16,25 +19,43 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.home_activity)
 
 
-
-        questButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        questButton.setOnClickListener{
+            val mIntent = Intent(this, QuestActivity::class.java)
+            startActivity(mIntent)
         }
-
-
 
         quickGamebutton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            showDialog(this)
         }
+
 
     }
 
 
     override fun onBackPressed() {
-        val mIntent = Intent(this, HomeActivity::class.java)
-        startActivity(mIntent)
+    showDialog(this)
     }
+
+}
+
+private fun showDialog(context: Context) {
+    val builder = AlertDialog.Builder(context)
+    builder.setMessage("\nMASZ 3 SEKUNDY NA ZAPAMIĘTANIE WSZYSTKICH OBRAZKÓW" +
+            "\n\nPOŁĄCZ OBRAZKI PARAMI I POBIJ REKORD!")
+    builder.setTitle("ROZPOCZNIJ GRĘ")
+    builder.setIcon(R.mipmap.fruit)
+    builder.setCancelable(false)
+    builder.setView(R.layout.dialog_vin)
+    builder.setCancelable(true)
+    builder.setNegativeButton("Anuluj"){dialogInterface, i ->
+
+    }
+    builder.setPositiveButton("Rozpocznij grę") { dialogInterface, i ->
+        gamesPoints=0
+        val mIntent = Intent(context, PlayActivity::class.java)
+        context.startActivity(mIntent)
+    }
+    builder.create().show()
+
 
 }
