@@ -19,17 +19,21 @@ class PlayActivity : AppCompatActivity() {
 
     private val listOfElements = listOf(
         Element(R.mipmap.orange, (1..9).random()),
-        Element(R.mipmap.orange, (1..9).random()),
-        Element(R.mipmap.watermelon, (1..9).random()),
         Element(R.mipmap.watermelon, (1..9).random()),
         Element(R.mipmap.banana, (1..9).random()),
-        Element(R.mipmap.banana, (1..9).random()),
-        Element(R.mipmap.kiwiii, (1..9).random()),
         Element(R.mipmap.kiwiii, (1..9).random()),
         Element(R.mipmap.apple, (1..9).random()),
+        Element(R.mipmap.orange, (1..9).random()),
+
+        Element(R.mipmap.watermelon, (1..9).random()),
+        Element(R.mipmap.banana, (1..9).random()),
+        Element(R.mipmap.kiwiii, (1..9).random()),
         Element(R.mipmap.apple, (1..9).random()),
         Element(R.mipmap.pomegranate, (1..9).random()),
         Element(R.mipmap.pomegranate, (1..9).random())
+
+
+
     )
 
     @SuppressLint("ClickableViewAccessibility")
@@ -45,29 +49,33 @@ class PlayActivity : AppCompatActivity() {
         }
 
 
+        shuffle(listOfElements)
+
+        var numberOfCardsToPlay= intent.getIntExtra("ww", 12)
+        var numberOfSpanToPlay= intent.getIntExtra("rr", 3)
+
+        val cards=numberOfCardsToPlay/2
+
         val animals: MutableList<Element> = ArrayList(9)
         val random = Random()
-        for (i in 0..6) {
+        for (i in 1..numberOfCardsToPlay) {
             val randomAnimal: Element = listOfElements[random.nextInt(listOfElements.size)]
             val animal = Element(randomAnimal.imageString, randomAnimal.elementId)
             animals.add(animal)
-            animals.add(animal)
         }
 
-        shuffle(listOfElements)
+
 
 
         elementsRecyclerView.apply {
-            layoutManager = GridLayoutManager(this@PlayActivity, 3)
+            layoutManager = GridLayoutManager(this@PlayActivity, numberOfSpanToPlay)
             adapter =
-                RecyclerViewAdapter(elementsRecyclerView, listOfElements as MutableList<Element>)
+                RecyclerViewAdapter(elementsRecyclerView,
+                    listOfElements as MutableList<Element>, numberOfCardsToPlay)
         }
 
         textPoint= findViewById<TextView>(R.id.pointsTextView)
         countPoints()
-
-
-
 
 
 
@@ -78,21 +86,12 @@ class PlayActivity : AppCompatActivity() {
        showDialog(this)
     }
 
-
-fun tt(){
-
-}
-
-
-
 }
 
     @SuppressLint("SetTextI18n")
     fun countPoints(){
         textPoint!!.text= "Liczba ruchów: $gamesPoints"
 }
-
-
 
 private fun showDialog(context: Context) {
     val builder = AlertDialog.Builder(context)

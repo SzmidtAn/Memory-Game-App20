@@ -26,14 +26,21 @@
       android:id="@+id/elementsRecyclerView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      tools:itemCount="12"
+      app:layout_constraintHeight_max="wrap"
       android:layout_marginTop="20dp"
+      tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
       tools:listitem="@layout/element_recycle_view"
-      app:layout_constraintBottom_toBottomOf="parent"
+      tools:itemCount="24"
+      tools:orientation="vertical"
+      tools:spanCount="6"
+      android:scrollbars="vertical"
 
+      app:fastScrollEnabled="false"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/pointsTextView" />
+  />
 
   <Button
       android:id="@+id/resumeButton"

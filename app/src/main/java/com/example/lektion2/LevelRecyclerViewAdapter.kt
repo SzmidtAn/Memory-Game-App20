@@ -38,25 +38,29 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
 
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = myDataset!!.size
+    override fun getItemCount() : Int{
+
+        return myDataset!!.size
+    }
 
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: LevelRecyclerViewAdapter.MyViewHolder, position: Int) {
 
-      var level= myDataset!!.get(position)
+      var level= myDataset!![position]
 
         var text: String= level.level.toString()
         holder.levelText.text=text
 
 
-        if (text != "1"){
+        if (text.toInt() > 4 ){
             holder.levelText.setBackgroundColor(R.color.colorPrimary)
             holder.levelText.setTextColor(R.color.colorPrimaryDark)
         }else{
 
         holder.levelText.setOnClickListener{
-            showDialog(holder.levelText.context)
+            level.cou()
+            showDialog(holder.levelText.context, level.numberOfCards, level.numberOfSpan)
 
         }
 
@@ -66,7 +70,7 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
 }
 
 
-private fun showDialog(context: Context) {
+private fun showDialog(context: Context, numOfCards:Int, numOfSpan: Int) {
     val builder = AlertDialog.Builder(context)
     builder.setMessage("\nMASZ 3 SEKUNDY NA ZAPAMIĘTANIE WSZYSTKICH OBRAZKÓW" +
             "\n\nPOŁĄCZ OBRAZKI PARAMI I POBIJ REKORD!")
@@ -81,6 +85,8 @@ private fun showDialog(context: Context) {
     builder.setPositiveButton("Rozpocznij grę") { dialogInterface, i ->
         gamesPoints=0
         val mIntent = Intent(context, PlayActivity::class.java)
+        mIntent.putExtra("ww", numOfCards)
+        mIntent.putExtra("rr", numOfSpan)
         context.startActivity(mIntent)
     }
     builder.create().show()
@@ -90,6 +96,6 @@ private fun showDialog(context: Context) {
 
 
 
-fun changeLevelsNumber(){
+fun changeCardsNumber(){
 
 }

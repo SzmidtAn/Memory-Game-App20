@@ -41,6 +41,7 @@ class QuestActivity : AppCompatActivity() {
 
         rightButton.setOnClickListener {
             val textFragment = QuestFragment(16)
+            
             val manager = supportFragmentManager
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.fragment_container,textFragment)
