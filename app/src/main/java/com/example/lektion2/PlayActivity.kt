@@ -17,24 +17,7 @@ var textPoint: TextView? =null
 
 class PlayActivity : AppCompatActivity() {
 
-    private val listOfElements = listOf(
-        Element(R.mipmap.orange, (1..9).random()),
-        Element(R.mipmap.watermelon, (1..9).random()),
-        Element(R.mipmap.banana, (1..9).random()),
-        Element(R.mipmap.kiwiii, (1..9).random()),
-        Element(R.mipmap.apple, (1..9).random()),
-        Element(R.mipmap.orange, (1..9).random()),
-
-        Element(R.mipmap.watermelon, (1..9).random()),
-        Element(R.mipmap.banana, (1..9).random()),
-        Element(R.mipmap.kiwiii, (1..9).random()),
-        Element(R.mipmap.apple, (1..9).random()),
-        Element(R.mipmap.pomegranate, (1..9).random()),
-        Element(R.mipmap.pomegranate, (1..9).random())
-
-
-
-    )
+    private val listOfElements = getListOfElements()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,26 +27,40 @@ class PlayActivity : AppCompatActivity() {
 
         resumeButton.setOnClickListener {
             showDialog(this)
-
-
         }
 
 
-        shuffle(listOfElements)
-
-        var numberOfCardsToPlay= intent.getIntExtra("ww", 12)
-        var numberOfSpanToPlay= intent.getIntExtra("rr", 3)
+        val numberOfCardsToPlay= intent.getIntExtra("ww", 12)
+        val numberOfSpanToPlay= intent.getIntExtra("rr", 3)
 
         val cards=numberOfCardsToPlay/2
 
         val animals: MutableList<Element> = ArrayList(9)
         val random = Random()
-        for (i in 1..numberOfCardsToPlay) {
-            val randomAnimal: Element = listOfElements[random.nextInt(listOfElements.size)]
+        for (i in 1..cards) {
+            var randomAnimal: Element = listOfElements[random.nextInt(listOfElements.size)]
+
+            var checkBoolean = false
+            while (checkBoolean == false){
+
+            if (checkIfElementAlreadyExists(randomAnimal.elementId, animals) && i >1){
+            randomAnimal=  listOfElements[random.nextInt(listOfElements.size)]
+                checkIfElementAlreadyExists(randomAnimal.elementId, animals)
+            }else{
+                checkBoolean=true
+            }
+
+            }
+
             val animal = Element(randomAnimal.imageString, randomAnimal.elementId)
+            val animal2 = Element(randomAnimal.imageString, randomAnimal.elementId)
             animals.add(animal)
+            animals.add(animal2)
+            checkBoolean=false
         }
 
+
+        shuffle(animals)
 
 
 
@@ -71,7 +68,7 @@ class PlayActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@PlayActivity, numberOfSpanToPlay)
             adapter =
                 RecyclerViewAdapter(elementsRecyclerView,
-                    listOfElements as MutableList<Element>, numberOfCardsToPlay)
+                    animals, numberOfCardsToPlay)
         }
 
         textPoint= findViewById<TextView>(R.id.pointsTextView)
@@ -80,6 +77,15 @@ class PlayActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun checkIfElementAlreadyExists(imageString: Int, animals: MutableList<Element>): Boolean {
+        for (i in animals){
+            if (imageString == i.elementId){
+                return true
+            }
+        }
+        return false
     }
 
     override fun onBackPressed() {

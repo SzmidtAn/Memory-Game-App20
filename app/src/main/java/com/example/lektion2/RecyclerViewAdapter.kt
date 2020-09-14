@@ -69,7 +69,7 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
         Glide.with(holder.imageElement.context)
             .asBitmap()
             .load(products?.get(position)!!.imageString)
-            .centerCrop()
+            .fitCenter()
             .into(holder.imageElement)
 
         Handler().postDelayed({
@@ -103,7 +103,7 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
                 Glide.with(holder.imageElement.context)
                     .asBitmap()
                     .load(element.imageString)
-                    .centerCrop()
+                    .circleCrop()
                     .into(holder.imageElement)
 
 

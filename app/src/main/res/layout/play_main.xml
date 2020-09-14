@@ -24,13 +24,13 @@
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/elementsRecyclerView"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:layout_constraintHeight_max="wrap"
       android:layout_marginTop="20dp"
       tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
       tools:listitem="@layout/element_recycle_view"
-      tools:itemCount="24"
+      tools:itemCount="36"
       tools:orientation="vertical"
       tools:spanCount="6"
       android:scrollbars="vertical"

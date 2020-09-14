@@ -53,7 +53,7 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
         holder.levelText.text=text
 
 
-        if (text.toInt() > 4 ){
+        if (text.toInt() > 20 ){
             holder.levelText.setBackgroundColor(R.color.colorPrimary)
             holder.levelText.setTextColor(R.color.colorPrimaryDark)
         }else{
