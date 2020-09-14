@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Memory game</string>
     <string name="levels">LEVELS</string>
+    <string name="start_game">ROZPOCZNIJ GRĘ</string>
+    <string name="cancel">Anuluj</string>
+    <string name="start">START</string>
+    <string name="start_gam">Rozpocznij grę</string>
+    <string name="continue_playing">Graj dalej</string>
+    <string name="go_to_menu">Idż do menu</string>
+    <string name="are_y_sure_stop_game">Jesteś pewny, że chcesz zakończyć grę?</string>
+    <string name="pause">PAUSE</string>
+    <string name="congratulation">Gratulacje!</string>
+    <string name="you_need">Potrzebowałeś</string>
+    <string name="moves_and">ruchów oraz</string>
+    <string name="to_end_game_great_job">, aby ukończyć rundę. Niezła robota!</string>
+    <string name="message_rules">"MASZ 3 SEKUNDY NA ZAPAMIĘTANIE WSZYSTKICH OBRAZKÓW "</string>
+    <string name="rules2">POŁĄCZ OBRAZKI PARAMI I POBIJ REKORD!</string>
 </resources>

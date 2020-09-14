@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Memory game</string>
+    <string name="levels">LEVELS</string>
+    <string name="start_game">SPELA</string>
+    <string name="cancel">Avbryt</string>
+    <string name="start_gam">Spela</string>
+    <string name="continue_playing">Spela vidare</string>
+    <string name="go_to_menu">Gå till menyn</string>
+    <string name="are_y_sure_stop_game">Är du säker på att du vill avsluta spelet?</string>
+    <string name="congratulation">Grattis!</string>
+    <string name="you_need">Du behövt</string>
+    <string name="moves_and">"drag och "</string>
+    <string name="to_end_game_great_job">, för att klara spelet. Bra jobbat!</string>
+    <string name="message_rules">DU HAR 3 SEKUNDER FÖR ATT KOMMA IHÅG ALLA BILDER</string>
+    <string name="rules2">KOMBINERA BILDERNA I PAR OCH FÅ ETT SPELREKORD!</string>
+</resources>

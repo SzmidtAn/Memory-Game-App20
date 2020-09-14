@@ -72,17 +72,17 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
 
 private fun showDialog(context: Context, numOfCards:Int, numOfSpan: Int) {
     val builder = AlertDialog.Builder(context)
-    builder.setMessage("\nMASZ 3 SEKUNDY NA ZAPAMIĘTANIE WSZYSTKICH OBRAZKÓW" +
-            "\n\nPOŁĄCZ OBRAZKI PARAMI I POBIJ REKORD!")
-    builder.setTitle("ROZPOCZNIJ GRĘ")
+    builder.setMessage("\n" + context.getString(R.string.message_rules) + "\n\n" +context.getString(R.string.rules2))
+
+    builder.setTitle(context.getString(R.string.start_gam))
     builder.setIcon(R.mipmap.fruit)
     builder.setCancelable(false)
     builder.setView(R.layout.dialog_vin)
     builder.setCancelable(true)
-    builder.setNegativeButton("Anuluj"){dialogInterface, i ->
+    builder.setNegativeButton(context.getString(R.string.cancel)){dialogInterface, i ->
 
     }
-    builder.setPositiveButton("Rozpocznij grę") { dialogInterface, i ->
+    builder.setPositiveButton(context.getString(R.string.start_gam)) { dialogInterface, i ->
         gamesPoints=0
         val mIntent = Intent(context, PlayActivity::class.java)
         mIntent.putExtra("ww", numOfCards)

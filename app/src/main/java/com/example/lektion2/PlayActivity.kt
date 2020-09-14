@@ -4,8 +4,12 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
+import android.widget.Chronometer
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.play_main.*
@@ -14,11 +18,13 @@ import java.util.Collections.shuffle
 import kotlin.collections.ArrayList
 
 var textPoint: TextView? =null
+var timeView: Chronometer? =null
 
 class PlayActivity : AppCompatActivity() {
 
     private val listOfElements = getListOfElements()
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +78,11 @@ class PlayActivity : AppCompatActivity() {
         }
 
         textPoint= findViewById<TextView>(R.id.pointsTextView)
+        timeView= findViewById<TextView>(R.id.timeTextView) as Chronometer?
         countPoints()
+
+
+
 
 
 
@@ -96,21 +106,24 @@ class PlayActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun countPoints(){
-        textPoint!!.text= "Liczba ruchów: $gamesPoints"
+        textPoint!!.text= "MOVES: $gamesPoints"
 }
 
-private fun showDialog(context: Context) {
+private fun
+        showDialog(context: Context) {
+    timeView?.stop()
     val builder = AlertDialog.Builder(context)
-    builder.setMessage("\nJesteś pewny, że chcesz zakończyć grę?")
-    builder.setTitle("PAUSE")
+    builder.setMessage(context.getString(R.string.are_y_sure_stop_game))
+    builder.setTitle(context.getString(R.string.pause))
     builder.setIcon(R.mipmap.fruit)
     builder.setCancelable(false)
     builder.setView(R.layout.dialog_vin)
     builder.setCancelable(true)
-    builder.setNegativeButton("Graj dalej"){dialogInterface, i ->
+    builder.setNegativeButton(context.getString(R.string.continue_playing)){ dialogInterface, i ->
+        timeView?.start()
 
     }
-    builder.setPositiveButton("Idż do menu") { dialogInterface, i ->
+    builder.setPositiveButton(context.getString(R.string.go_to_menu)) { dialogInterface, i ->
     gamesPoints=0
         val mIntent = Intent(context, HomeActivity::class.java)
         context.startActivity(mIntent)

@@ -36,7 +36,7 @@ class QuestFragment (var changeInt: Int= 0): Fragment() {
        listOfLevels!!.add(Level(10, 24, 5))
        listOfLevels!!.add(Level(11, 26, 5))
        listOfLevels!!.add(Level(12, 28, 5))
-       listOfLevels!!.add(Level(13, 30, 6))
+       listOfLevels!!.add(Level(13, 30, 5))
        listOfLevels!!.add(Level(14, 32, 6))
        listOfLevels!!.add(Level(15, 34, 6))
        listOfLevels!!.add(Level(16, 36, 6))

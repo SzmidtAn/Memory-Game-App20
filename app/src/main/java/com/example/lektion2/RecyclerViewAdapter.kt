@@ -14,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.lektion2.RecyclerViewAdapter.ViewHolder
 import kotlinx.android.synthetic.main.element_recycle_view.view.*
+import kotlinx.android.synthetic.main.play_main.*
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
+import kotlin.concurrent.timer
 import kotlin.coroutines.coroutineContext
 
 
@@ -62,6 +65,8 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
+
         var element = products?.get(position)
         element!!.elementId = position
 
@@ -72,6 +77,9 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
             .fitCenter()
             .into(holder.imageElement)
 
+        timeView?.base = SystemClock.elapsedRealtime()
+        timeView?.start()
+
         Handler().postDelayed({
 
             Glide.with(holder.imageElement.context)
@@ -79,6 +87,9 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
                 .load(R.mipmap.quesstion)
                 .centerCrop()
                 .into(holder.imageElement)
+
+
+
         }, 3000)
 
 
@@ -225,6 +236,7 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
             }
         }
         if (a == cardsNumToFunChech) {
+            timeView!!.stop()
             return true
         }
         return false
@@ -232,14 +244,15 @@ class RecyclerViewAdapter(mRecyclerList: RecyclerView?, list: MutableList<Elemen
 
     private fun showDialog(context: Context) {
 val builder = AlertDialog.Builder(context)
-        builder.setMessage("\nPotrzebowałeś $gamesPoints ruchów, aby ukończyć rundę.\n\nNiezła robota!")
+        builder.setMessage("\n" + context.getString(R.string.you_need) +  " $gamesPoints " + context.getString(
+                    R.string.moves_and) +  "${timeView!!.text} sec" + context.getString(R.string.to_end_game_great_job))
 
-        builder.setTitle("Gratulacje!")
+        builder.setTitle(context.getString(R.string.congratulation))
         builder.setIcon(R.mipmap.fruit)
         builder.setCancelable(false)
         builder.setView(R.layout.dialog_vin)
-        builder.setNegativeButton("Graj dalej") { dialogInterface, i ->
-            val mIntent = Intent(context, HomeActivity::class.java)
+        builder.setNegativeButton(context.getString(R.string.continue_playing)) { dialogInterface, i ->
+            val mIntent = Intent(context, QuestActivity::class.java)
             context.startActivity(mIntent)
         }
         gamesPoints=0
