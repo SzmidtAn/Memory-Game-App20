@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.element_recycle_view.*
 import kotlinx.android.synthetic.main.play_main.*
 import java.util.*
 import java.util.Collections.shuffle
@@ -80,8 +81,6 @@ class PlayActivity : AppCompatActivity() {
         textPoint= findViewById<TextView>(R.id.pointsTextView)
         timeView= findViewById<TextView>(R.id.timeTextView) as Chronometer?
         countPoints()
-
-
 
 
 
