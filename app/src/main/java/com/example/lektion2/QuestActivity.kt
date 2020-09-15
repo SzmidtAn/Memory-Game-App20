@@ -19,35 +19,14 @@ class QuestActivity : AppCompatActivity() {
         levelTextView.text= "LEVELS"
 
 
-      val textFragment = QuestFragment()
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        transaction.replace(R.id.fragment_container,textFragment)
-      transaction.addToBackStack(null)
-        transaction.commit()
-
+        getFragmentRecyclerView()
 
 
         backButton.setOnClickListener {
-            val textFragment = QuestFragment(0)
-            val manager = supportFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragment_container,textFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-
         }
 
 
         rightButton.setOnClickListener {
-            val textFragment = QuestFragment(16)
-            
-            val manager = supportFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragment_container,textFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-
         }
 
         homeButton.setOnClickListener {
@@ -57,6 +36,15 @@ class QuestActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun getFragmentRecyclerView() {
+        val textFragment = QuestFragment()
+        val manager = supportFragmentManager
+        val transaction = manager.beginTransaction()
+        transaction.replace(R.id.fragment_container,textFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     override fun onBackPressed() {

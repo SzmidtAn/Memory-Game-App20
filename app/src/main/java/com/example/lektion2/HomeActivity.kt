@@ -7,9 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.home_activity.*
-import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_activity.questButton as questButton1
-import kotlinx.android.synthetic.main.home_fragment.quickGamebutton as quickGamebutton1
 
 class HomeActivity : AppCompatActivity() {
 
@@ -47,7 +44,7 @@ private fun showDialog(context: Context) {
 
     }
     builder.setPositiveButton(context.getString(R.string.start_gam)) { dialogInterface, i ->
-        gamesPoints=0
+        movesInGame=0
         val mIntent = Intent(context, PlayActivity::class.java)
         context.startActivity(mIntent)
     }
