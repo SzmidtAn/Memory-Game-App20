@@ -11,7 +11,6 @@ class Level (var level:Int, var numberOfCards:Int = 9, var numberOfSpan: Int = 3
             20 -> numberOfSpan=5
             22 -> numberOfSpan=5
             24 -> numberOfSpan=6
-            26 -> numberOfSpan=6
         }
 
 
