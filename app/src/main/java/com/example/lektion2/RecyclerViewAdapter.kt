@@ -56,7 +56,7 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
         element.turnCard(holder.imageElement, element.imageString)
 
         Handler().postDelayed({
-            element.turnCard(holder.imageElement, element.imageDefault)
+            element.turnCard(holder.imageElement, R.mipmap.ic_launcher_round)
         }, 3000)
 
 

@@ -15,4 +15,6 @@
     <string name="to_end_game_great_job">, aby ukończyć rundę. Niezła robota!</string>
     <string name="message_rules">"MASZ 3 SEKUNDY NA ZAPAMIĘTANIE WSZYSTKICH OBRAZKÓW "</string>
     <string name="rules2">POŁĄCZ OBRAZKI PARAMI I POBIJ REKORD!</string>
+    <string name="quick_game">QUICK GAME</string>
+    <string name="quest">QUEST</string>
 </resources>
