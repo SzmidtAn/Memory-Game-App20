@@ -13,12 +13,6 @@ class Element (var imageString: Int, var elementId:Int, var ifFind:Boolean = fal
             .load(imageString)
             .centerCrop()
             .into(imageView)
-
-
-
-
-        
-
     }
 
 
