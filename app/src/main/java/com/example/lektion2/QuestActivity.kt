@@ -6,8 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.quest_activity.*
 
+        var fm: FragmentManager? =null
 
 class QuestActivity : AppCompatActivity() {
 
@@ -18,6 +20,8 @@ class QuestActivity : AppCompatActivity() {
 
         levelTextView.text= "LEVELS"
 
+
+        fm=supportFragmentManager
 
         getFragmentRecyclerView()
 

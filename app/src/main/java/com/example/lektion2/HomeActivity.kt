@@ -1,14 +1,13 @@
 package com.example.lektion2
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.home_activity.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(){
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,33 +21,24 @@ class HomeActivity : AppCompatActivity() {
         }
 
         quickGamebutton.setOnClickListener {
-            showDialog(this)
-        }
+            var fm=supportFragmentManager
+   showDialogMemoryRules(fm, 12, 3)
+
+     }
+
 
 
     }
-
 
 
 }
 
-private fun showDialog(context: Context) {
-    val builder = AlertDialog.Builder(context)
-    builder.setMessage("\n" + context.getString(R.string.message_rules) + "\n\n" +context.getString(R.string.rules2))
-    builder.setTitle(context.getString(R.string.start))
-    builder.setIcon(R.mipmap.fruit)
-    builder.setCancelable(false)
-    builder.setView(R.layout.dialog_vin)
-    builder.setCancelable(true)
-    builder.setNegativeButton(context.getString(R.string.cancel)){ dialogInterface, i ->
 
-    }
-    builder.setPositiveButton(context.getString(R.string.start_gam)) { dialogInterface, i ->
-        movesInGame=0
-        val mIntent = Intent(context, PlayActivity::class.java)
-        context.startActivity(mIntent)
-    }
-    builder.create().show()
+fun showDialogMemoryRules(fm: FragmentManager?, numOfCards: Int, numOfSpan: Int) {
+    var dialogfragm=DialogFragmentMemoryRules(numOfCards, numOfSpan)
 
+    fm?.let { dialogfragm.show(it, "fef") }
 
 }
+
+

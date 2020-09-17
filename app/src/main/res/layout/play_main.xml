@@ -27,11 +27,11 @@
       android:layout_marginLeft="30dp"
       android:id="@+id/timeImageView"
       android:src="@mipmap/chronometer"
-      app:layout_constraintTop_toTopOf="@id/timeTextView"
+      app:layout_constraintTop_toTopOf="@id/timeDialogWinTextView"
   app:layout_constraintLeft_toRightOf="@id/pointsTextView"/>
 
   <Chronometer
-      android:id="@+id/timeTextView"
+      android:id="@+id/timeDialogWinTextView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
 
@@ -53,11 +53,9 @@
       app:fastScrollEnabled="false"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHeight_max="wrap"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-
-      tools:itemCount="16"
+      tools:itemCount="50"
       tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
       tools:listitem="@layout/element_recycle_view"
       tools:orientation="vertical"

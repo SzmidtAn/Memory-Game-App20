@@ -11,12 +11,14 @@ import android.widget.Chronometer
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.play_main.*
 import java.util.*
 import java.util.Collections.shuffle
 import kotlin.collections.ArrayList
 
+var fmf: FragmentManager? =null
 var textPoint: TextView? =null
 var timeView: Chronometer? =null
 
@@ -31,8 +33,10 @@ class PlayActivity : AppCompatActivity() {
         setContentView(R.layout.play_main)
 
         resumeButton.setOnClickListener {
-            showDialog(this)
+            showDialogResume(this)
         }
+
+        fmf=supportFragmentManager
 
 
         val numberOfCardsToPlay= intent.getIntExtra("ww", 12)
@@ -74,10 +78,12 @@ class PlayActivity : AppCompatActivity() {
         }
 
         textPoint= findViewById<TextView>(R.id.pointsTextView)
-        timeView= findViewById<TextView>(R.id.timeTextView) as Chronometer?
+        timeView= findViewById<TextView>(R.id.timeDialogWinTextView) as Chronometer?
 
         countPoints()
         startTime()
+
+
 
     }
 
@@ -91,7 +97,7 @@ class PlayActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-       showDialog(this)
+       showDialogResume(this)
     }
 
 }
@@ -102,29 +108,7 @@ class PlayActivity : AppCompatActivity() {
         textPoint!!.text= "MOVES: $movesInGame"
 }
 
-private fun
-        showDialog(context: Context) {
-    timeView?.stop()
-    val builder = AlertDialog.Builder(context)
-    builder.setMessage(context.getString(R.string.are_y_sure_stop_game))
-    builder.setTitle(context.getString(R.string.pause))
-    builder.setIcon(R.mipmap.fruit)
-    builder.setCancelable(false)
-    builder.setView(R.layout.dialog_vin)
-    builder.setCancelable(true)
-    builder.setNegativeButton(context.getString(R.string.continue_playing)){ dialogInterface, i ->
-        timeView?.start()
 
-    }
-    builder.setPositiveButton(context.getString(R.string.go_to_menu)) { dialogInterface, i ->
-    movesInGame=0
-        val mIntent = Intent(context, HomeActivity::class.java)
-        context.startActivity(mIntent)
-    }
-    builder.create().show()
-
-
-}
 
 
 fun checkIfWinner(list: MutableList<Element>, context: Context): Boolean {
@@ -136,29 +120,44 @@ fun checkIfWinner(list: MutableList<Element>, context: Context): Boolean {
     }
     if (a == cardsNumToFunCheck) {
         timeView!!.stop()
-        showDialog1(context)
+        showDialogWinner(fmf)
         return true
     }
     return false
 }
 
 
-private fun showDialog1(context: Context) {
-    val builder = AlertDialog.Builder(context)
-    builder.setMessage("\n" + context.getString(R.string.you_need) +  " $movesInGame " + context.getString(
-        R.string.moves_and) +  "${timeView!!.text} sec" + context.getString(R.string.to_end_game_great_job))
+public fun showDialogResume(context: Context) {
 
-    builder.setTitle(context.getString(R.string.congratulation))
-    builder.setIcon(R.mipmap.fruit)
-    builder.setCancelable(false)
-    builder.setView(R.layout.dialog_vin)
-    builder.setNegativeButton(context.getString(R.string.continue_playing)) { dialogInterface, i ->
-        val mIntent = Intent(context, QuestActivity::class.java)
-        context.startActivity(mIntent)
+        timeView?.stop()
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage(context.getString(R.string.are_y_sure_stop_game))
+        builder.setTitle(context.getString(R.string.pause))
+        builder.setIcon(R.drawable.fruit)
+        builder.setCancelable(false)
+        builder.setCancelable(true)
+        builder.setNegativeButton(context.getString(R.string.continue_playing)){ dialogInterface, i ->
+            timeView?.start()
+
+        }
+        builder.setPositiveButton(context.getString(R.string.go_to_menu)) { dialogInterface, i ->
+            movesInGame=0
+            val mIntent = Intent(context, HomeActivity::class.java)
+            context.startActivity(mIntent)
+        }
+        builder.create().show()
+
+
     }
-    movesInGame=0
-    builder.create().show()
 
+
+
+
+
+public fun showDialogWinner(fm: FragmentManager?) {
+    var dialogfragm=DialogFragmentWinner()
+
+    fm?.let { dialogfragm.show(it, "fef") }
 
 }
 

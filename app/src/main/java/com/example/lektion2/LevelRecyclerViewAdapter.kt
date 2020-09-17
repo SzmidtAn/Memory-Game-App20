@@ -1,9 +1,6 @@
 package com.example.lektion2
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +45,7 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
         }else{
         holder.levelText.setOnClickListener{
             level.cou()
-            showDialog(holder.levelText.context, level.numberOfCards, level.numberOfSpan)
+            showDialogMemoryRules(fm,  level.numberOfCards, level.numberOfSpan)
         }
 
         }
@@ -57,25 +54,6 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
 }
 
 
-private fun showDialog(context: Context, numOfCards:Int, numOfSpan: Int) {
-    val builder = AlertDialog.Builder(context)
-    builder.setMessage("\n" + context.getString(R.string.message_rules) + "\n\n" +context.getString(R.string.rules2))
 
-    builder.setTitle(context.getString(R.string.start_gam))
-    builder.setIcon(R.mipmap.fruit)
-    builder.setCancelable(false)
-    builder.setView(R.layout.dialog_vin)
-    builder.setCancelable(true)
-    builder.setNegativeButton(context.getString(R.string.cancel)){dialogInterface, i ->
 
-    }
-    builder.setPositiveButton(context.getString(R.string.start_gam)) { dialogInterface, i ->
-        movesInGame=0
-        val mIntent = Intent(context, PlayActivity::class.java)
-        mIntent.putExtra("ww", numOfCards)
-        mIntent.putExtra("rr", numOfSpan)
-        context.startActivity(mIntent)
-    }
-    builder.create().show()
 
-}

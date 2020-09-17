@@ -1,5 +1,9 @@
 package com.example.lektion2
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
+
 class Level (var level:Int, var numberOfCards:Int = 9, var numberOfSpan: Int = 3) {
 
     fun cou() {
@@ -19,4 +23,8 @@ class Level (var level:Int, var numberOfCards:Int = 9, var numberOfSpan: Int = 3
         }
 
     }
+
+
+
 }
+
