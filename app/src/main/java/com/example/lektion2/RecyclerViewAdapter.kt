@@ -1,5 +1,6 @@
 package com.example.lektion2
 
+import android.media.MediaPlayer
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import kotlin.collections.ArrayList
 
 var movesInGame:Int=0
 var cardsNumToFunCheck:Int= 0
+var mediaPlayer: MediaPlayer? = null
 
 class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: MutableList<Element>, cardsCount:Int = 12) :
     RecyclerView.Adapter<ViewHolder>() {
@@ -30,6 +32,7 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.element_recycle_view, parent, false)
 
+
         return ViewHolder(view)
 
     }
@@ -38,6 +41,8 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         var imageElement = view.findViewById<ImageView>(R.id.imageImageView)
+
+
 
     }
 
@@ -49,6 +54,7 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        holder.imageElement.isEnabled=false
         val element = products?.get(position)
         element!!.elementId = position
 
@@ -56,24 +62,58 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
         element.turnCard(holder.imageElement, element.imageString)
 
         Handler().postDelayed({
+        holder.imageElement.isEnabled=true
             element.turnCard(holder.imageElement, element.imageDefault)
         }, 3000)
 
 
 
+
+
             holder.imageElement.setOnClickListener { it ->
-        if (!element.ifFind) {
+
+
+
+
+
+
                 val context = holder.imageElement.context
 
+
+        if (!element.ifFind) {
+
+                mediaPlayer = MediaPlayer.create(context, R.raw.carfli)
+                mediaPlayer?.start() // no need to call prepare(); create() does that for you
+
+
+
+                if (checkElements.size <2) {
+
+
+
                 checkElements.add(element)
+                }
+
+
                 element.turnCard(holder.imageElement, element.imageString)
 
-                if (checkElements.size >1) {
                 element.ifFind=true
+                if (checkElements.size >1) {
+
+
+
+                    for (i in products!!) {
+                        val getViewForElements = mRecyclerList?.findViewHolderForAdapterPosition(i.elementId)?.itemView?.imageImageView
+                        getViewForElements!!.isEnabled = false
+                    }
+
+
                     countPoints()
             saveElementsToCompare()
 
                     if (checkIfElementsSame(element1!!, element2!!)) {
+                        val mediaPlayer1 = MediaPlayer.create(context, R.raw.bing)
+                        mediaPlayer1?.start()
                         setIfFindBoolean(element1, true)
                         setIfFindBoolean(element2, true)
                     } else {
@@ -82,23 +122,30 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
                     }
 
 
+
                     Handler().postDelayed({
                         setImageAfterChecking()
                     }, 600)
                 }
                 checkIfWinner(this.products!!, context)
+
             }
-                }
+
+
+
+            }
         }
 
 
     private fun setImageAfterChecking() {
         for (i in products!!){
             val getViewForElements= mRecyclerList?.findViewHolderForAdapterPosition(i.elementId)?.itemView?.imageImageView
+            getViewForElements!!.isEnabled = true
             if (!i.ifFind){
-                getViewForElements?.let { it1 -> i.turnCard(it1, i.imageDefault) }
+                getViewForElements.let { it1 -> i.turnCard(it1, i.imageDefault) }
             } else if (i.ifFind){
-                getViewForElements!!.visibility=View.GONE
+  
+                getViewForElements.visibility=View.GONE
             }
         }
     }
@@ -112,7 +159,7 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
         element1 = checkElements[0]
         element2 = checkElements[1]
 
-        checkElements.clear()
+        checkElements.removeAll(checkElements)
     }
 
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -18,6 +19,7 @@ import java.util.*
 import java.util.Collections.shuffle
 import kotlin.collections.ArrayList
 
+
 var fmf: FragmentManager? =null
 var textPoint: TextView? =null
 var timeView: Chronometer? =null
@@ -31,6 +33,9 @@ class PlayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.play_main)
+
+
+
 
         resumeButton.setOnClickListener {
             showDialogResume(this)
@@ -72,9 +77,10 @@ class PlayActivity : AppCompatActivity() {
 
         elementsRecyclerView.apply {
             layoutManager = GridLayoutManager(this@PlayActivity, numberOfSpanToPlay)
-            adapter =
-                RecyclerViewAdapter(elementsRecyclerView,
-                    animals, numberOfCardsToPlay)
+            adapter = RecyclerViewAdapter(elementsRecyclerView, animals, numberOfCardsToPlay)
+
+
+
         }
 
         textPoint= findViewById<TextView>(R.id.pointsTextView)
@@ -82,6 +88,12 @@ class PlayActivity : AppCompatActivity() {
 
         countPoints()
         startTime()
+
+
+
+
+
+
 
 
 
@@ -99,6 +111,8 @@ class PlayActivity : AppCompatActivity() {
     override fun onBackPressed() {
        showDialogResume(this)
     }
+
+
 
 }
 
@@ -120,10 +134,39 @@ fun checkIfWinner(list: MutableList<Element>, context: Context): Boolean {
     }
     if (a == cardsNumToFunCheck) {
         timeView!!.stop()
-        showDialogWinner(fmf)
+        showDialogWinner(context, fmf)
+        saveScore(context, movesInGame)
+
+
         return true
     }
     return false
+}
+
+fun saveScore(context: Context, score: Int) {
+    val sharedPreferences = context.getSharedPreferences("YOUR_PACKAGE_NAME", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+
+    if ((cardsNumToFunCheck+2) > loadAvailableLevels(context)){
+        editor.putInt("levels", (cardsNumToFunCheck+2))
+    }
+
+    if (movesInGame < loadScore(context)){
+        editor.putInt(cardsNumToFunCheck.toString(), movesInGame)
+
+    }
+
+    editor.apply()
+}
+
+fun loadScore(context: Context?): Int {
+    val sharedPreferences = context?.getSharedPreferences("YOUR_PACKAGE_NAME", Context.MODE_PRIVATE)
+    return sharedPreferences?.getInt(cardsNumToFunCheck.toString(), 1000)!!
+}
+
+fun loadAvailableLevels(context: Context?): Int {
+    val sharedPreferences = context?.getSharedPreferences("YOUR_PACKAGE_NAME", Context.MODE_PRIVATE)
+    return sharedPreferences?.getInt("levels", 7)!!
 }
 
 
@@ -154,8 +197,12 @@ public fun showDialogResume(context: Context) {
 
 
 
-public fun showDialogWinner(fm: FragmentManager?) {
+public fun showDialogWinner(context: Context, fm: FragmentManager?) {
     var dialogfragm=DialogFragmentWinner()
+
+    mediaPlayer = MediaPlayer.create(context, R.raw.yay)
+    mediaPlayer?.start() // no need to call prepare(); create() does that for you
+
 
     fm?.let { dialogfragm.show(it, "fef") }
 

@@ -23,7 +23,7 @@ fun getListOfElements(): MutableList<Element>{
     listOfNames.add(Element(R.drawable.broccoli, (0..9999).random()))
     listOfNames.add(Element(R.drawable.butcher, (0..9999).random()))
     listOfNames.add(Element(R.drawable.cabbage, (0..9999).random()))
-    listOfNames.add(Element(R.drawable.cabbage, (0..9999).random()))
+    listOfNames.add(Element(R.drawable.pizza, (0..9999).random()))
     listOfNames.add(Element(R.drawable.can, (0..9999).random()))
     listOfNames.add(Element(R.drawable.candy, (0..9999).random()))
     listOfNames.add(Element(R.drawable.carrot, (0..9999).random()))

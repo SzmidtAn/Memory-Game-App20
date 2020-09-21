@@ -2,6 +2,7 @@ package com.example.lektion2
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -15,6 +16,7 @@ class HomeActivity : AppCompatActivity(){
         setContentView(R.layout.home_activity)
 
 
+
         questButton.setOnClickListener{
             val mIntent = Intent(this, QuestActivity::class.java)
             startActivity(mIntent)
@@ -25,6 +27,12 @@ class HomeActivity : AppCompatActivity(){
    showDialogMemoryRules(fm, 12, 3)
 
      }
+
+
+
+        var mediaPlayer: MediaPlayer? = MediaPlayer.create(this, R.raw.home)
+        mediaPlayer?.isLooping=true
+        mediaPlayer?.start() // no need to call prepare(); create() does that for you
 
 
 

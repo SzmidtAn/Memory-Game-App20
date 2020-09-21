@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-
+var nextLevel: Level? =null
 class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
     RecyclerView.Adapter<LevelRecyclerViewAdapter.MyViewHolder>() {
-
 
     class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         var levelText = view.findViewById<TextView>(R.id.levelTextView)
@@ -35,18 +34,22 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: LevelRecyclerViewAdapter.MyViewHolder, position: Int) {
 
-      val level= myDataset!![position]
-        val text: String= level.level.toString()
+      var level= myDataset!![position]
+        val text: String= level!!.level.toString()
         holder.levelText.text=text
 
-        if (text.toInt() > 20 ){
+
+
+        var chechIfAvailable: Boolean= level!!.numberOfCards <= loadAvailableLevels(holder.levelText.context)
+
+        if ( chechIfAvailable ){
+        holder.levelText.setOnClickListener{
+            level!!.cou()
+            showDialogMemoryRules(fm,  level!!.numberOfCards, level!!.numberOfSpan)
+        }
+        }else{
             holder.levelText.setBackgroundColor(R.color.colorPrimary)
             holder.levelText.setTextColor(R.color.colorPrimaryDark)
-        }else{
-        holder.levelText.setOnClickListener{
-            level.cou()
-            showDialogMemoryRules(fm,  level.numberOfCards, level.numberOfSpan)
-        }
 
         }
 

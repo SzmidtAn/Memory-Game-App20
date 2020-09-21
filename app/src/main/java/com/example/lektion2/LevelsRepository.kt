@@ -4,7 +4,7 @@ fun getListOfLevels(): MutableList<Level>{
 
     val listOfLevels =  mutableListOf<Level>()
 
-    listOfLevels!!.add(Level(1, 6, 2))
+    listOfLevels!!.add(Level(1, 6, 2, true))
     listOfLevels!!.add(Level(2, 8, 3))
     listOfLevels!!.add(Level(3, 10, 3))
     listOfLevels!!.add(Level(4, 12, 4))

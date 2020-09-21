@@ -2,11 +2,14 @@ package com.example.lektion2
 
 import android.R.attr.fragment
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.quest_activity.*
 
         var fm: FragmentManager? =null
@@ -21,9 +24,18 @@ class QuestActivity : AppCompatActivity() {
         levelTextView.text= "LEVELS"
 
 
+        val listOfLevels= getListOfLevels()
+        val recyclerView = findViewById<RecyclerView>(R.id.levelsRecyclerView)
+
+        levelsRecyclerView.apply {
+            layoutManager = GridLayoutManager(this@QuestActivity, 4)
+            adapter = LevelRecyclerViewAdapter(listOfLevels)
+        }
+
+
+
         fm=supportFragmentManager
 
-        getFragmentRecyclerView()
 
 
         backButton.setOnClickListener {
@@ -40,16 +52,13 @@ class QuestActivity : AppCompatActivity() {
 
 
 
+
+
     }
 
-    private fun getFragmentRecyclerView() {
-        val textFragment = QuestFragment()
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        transaction.replace(R.id.fragment_container,textFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
+
+
+
 
     override fun onBackPressed() {
         val mIntent = Intent(this, HomeActivity::class.java)
@@ -58,3 +67,4 @@ class QuestActivity : AppCompatActivity() {
 
 
 }
+

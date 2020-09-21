@@ -4,7 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 
-class Level (var level:Int, var numberOfCards:Int = 9, var numberOfSpan: Int = 3) {
+class Level (var level:Int = 0, var numberOfCards:Int = 9, var numberOfSpan: Int = 3, var ifAvailable: Boolean = false) {
 
     fun cou() {
         when (numberOfCards){
@@ -22,6 +22,11 @@ class Level (var level:Int, var numberOfCards:Int = 9, var numberOfSpan: Int = 3
             level += 16
         }
 
+    }
+
+
+     fun makeLevelAvailable(){
+        ifAvailable=true
     }
 
 
