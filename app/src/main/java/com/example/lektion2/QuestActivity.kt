@@ -30,6 +30,7 @@ class QuestActivity : AppCompatActivity() {
         levelsRecyclerView.apply {
             layoutManager = GridLayoutManager(this@QuestActivity, 4)
             adapter = LevelRecyclerViewAdapter(listOfLevels)
+            levelsRecyclerView.isLayoutFrozen=true
         }
 
 

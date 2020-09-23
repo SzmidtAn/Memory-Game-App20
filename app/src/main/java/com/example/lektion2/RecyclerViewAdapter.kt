@@ -64,6 +64,9 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
         Handler().postDelayed({
         holder.imageElement.isEnabled=true
             element.turnCard(holder.imageElement, element.imageDefault)
+
+            mediaPlayerBackgrundMusic?.stop()
+
         }, 3000)
 
 

@@ -78,9 +78,7 @@ class PlayActivity : AppCompatActivity() {
         elementsRecyclerView.apply {
             layoutManager = GridLayoutManager(this@PlayActivity, numberOfSpanToPlay)
             adapter = RecyclerViewAdapter(elementsRecyclerView, animals, numberOfCardsToPlay)
-
-
-
+            elementsRecyclerView.isLayoutFrozen=true
         }
 
         textPoint= findViewById<TextView>(R.id.pointsTextView)

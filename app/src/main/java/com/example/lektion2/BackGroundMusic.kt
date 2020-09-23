@@ -1,22 +1,41 @@
 package com.example.lektion2
 
-import android.R
 import android.app.Service
 import android.content.Intent
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.IBinder
-import androidx.annotation.Nullable
 
 
+    var mediaPlayerBackgrundMusic: MediaPlayer? = null
 class BackGroundMusic : Service() {
-    var mediaPlayer: MediaPlayer? = null
-    var audioManager: AudioManager? = null
-    var volume = 0
-    override fun onBind(p0: Intent?): IBinder? {
+    override fun onBind(intent: Intent): IBinder? {
         return null
     }
 
 
+    override fun onCreate() {
+        super.onCreate();
+        mediaPlayerBackgrundMusic = MediaPlayer.create(this, com.example.lektion2.R.raw.home);
+        mediaPlayerBackgrundMusic?.isLooping=true
 
+
+
+    }
+
+
+
+
+
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        mediaPlayerBackgrundMusic!!.start()
+        return startId
+    }
+
+    override fun onStart(intent: Intent, startId: Int) {}
+    override fun onDestroy() {
+        mediaPlayerBackgrundMusic!!.pause()
+        mediaPlayerBackgrundMusic!!.release()
+    }
+
+    override fun onLowMemory() {}
 }

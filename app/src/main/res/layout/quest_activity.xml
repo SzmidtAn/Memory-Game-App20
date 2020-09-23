@@ -37,8 +37,8 @@
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:paddingBottom="15dp"
         android:textAlignment="center"
         android:drawableBottom="@android:drawable/ic_media_previous"
@@ -47,8 +47,8 @@
 
     <Button
         android:id="@+id/rightButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:paddingBottom="15dp"
         android:textAlignment="center"
         android:layout_marginTop="10dp"
