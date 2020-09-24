@@ -2,53 +2,148 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="650dp"
-    tools:context=".PlayActivity"
+    android:id="@+id/laybig"
+    android:layout_width="400dp"
+    android:layout_gravity="center"
+    app:layout_constraintLeft_toLeftOf="parent"
 
-    android:foreground="@drawable/lll">
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/textView4"
+
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:text="Awesome!"
-        android:textColor="#000"
-        android:textSize="50sp"
+        android:layout_height="150dp"
+        android:id="@+id/starImage"
+        android:src="@drawable/str"
+        android:elevation="10dp"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/laybig"
+        />
 
-        app:layout_constraintTop_toBottomOf="@id/imageView7"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="188dp" />
-
-    <TextView
-        android:id="@+id/movesTextView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="30dp"
-        android:text="New high score is 4"
-        android:textColor="#000"
-        android:textSize="25sp"
+        android:padding="100dp"
+        android:id="@+id/laysmall"
+        android:layout_marginTop="80dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/backgrund_winner_dialog"
+        app:layout_constraintBottom_toBottomOf="@id/laybig"
+        app:layout_constraintTop_toTopOf="@id/laybig"        >
 
-        app:layout_constraintTop_toBottomOf="@id/textView4" />
 
-    <TextView
-        android:id="@+id/timeDialogWinTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Time:"
-        android:textColor="#000"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="@id/movesTextView"
-        app:layout_constraintTop_toBottomOf="@id/movesTextView"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="140dp" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Awesome!"
+            android:textColor="#000"
+            android:textSize="50sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+     />
+
+
+        <TextView
+            android:id="@+id/movesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New high score is 4"
+            android:textSize="25sp"
+            android:textColor="#000"
+            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:contentDescription="Custom Dialogs"
+            app:layout_constraintTop_toBottomOf="@id/textView4"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/timeDialogWinTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:textSize="25sp"
+            android:textColor="#000"
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="@id/movesTextView"
+            app:layout_constraintTop_toBottomOf="@id/movesTextView"
+            tools:layout_editor_absoluteX="115dp"
+            tools:layout_editor_absoluteY="140dp" />
+
+
+        <ImageView
+            android:id="@+id/TrophyimageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/trophy"
+            app:layout_constraintTop_toTopOf="@id/movesTextView"
+            app:layout_constraintRight_toLeftOf="@id/movesTextView"
+            tools:layout_editor_absoluteX="251dp"
+            tools:layout_editor_absoluteY="359dp" />
+
+        <ImageView
+            android:id="@+id/Trophy2imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/trophy"
+            app:layout_constraintTop_toTopOf="@id/movesTextView"
+            app:layout_constraintLeft_toRightOf="@id/movesTextView"
+            tools:layout_editor_absoluteX="251dp"
+            tools:layout_editor_absoluteY="359dp" />
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/timeDialogWinTextView"
+
+            >
+
+            <Button
+                android:id="@+id/goToMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grid_item_corner"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:layout_margin="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Go to menu"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                />
+
+            §<Button
+            android:id="@+id/goToNextLevelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grid_item_corner"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="20dp"
+            android:text="PLAY"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

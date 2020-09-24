@@ -116,8 +116,8 @@ class PlayActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun countPoints(){
+        textPoint!!.text= movesInGame.toString()
         movesInGame++
-        textPoint!!.text= "MOVES: $movesInGame"
 }
 
 

@@ -40,7 +40,9 @@ class HomeActivity : AppCompatActivity(){
     }
 
 
+
 }
+
 
 
 fun showDialogMemoryRules(fm: FragmentManager?, numOfCards: Int, numOfSpan: Int) {
