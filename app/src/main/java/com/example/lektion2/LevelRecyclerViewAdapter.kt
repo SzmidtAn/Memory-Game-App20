@@ -1,6 +1,7 @@
 package com.example.lektion2
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,10 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
 
         if ( chechIfAvailable ){
         holder.levelText.setOnClickListener{
+
+            mediaPlayer = MediaPlayer.create(holder.levelText.context, R.raw.clickbutton)
+            mediaPlayer?.start() // no need to call prepare(); create() does that for you
+
             level!!.cou()
             showDialogMemoryRules(fm,  level!!.numberOfCards, level!!.numberOfSpan)
         }

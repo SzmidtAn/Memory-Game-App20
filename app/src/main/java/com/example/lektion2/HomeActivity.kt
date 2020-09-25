@@ -2,6 +2,7 @@ package com.example.lektion2
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -16,11 +17,18 @@ class HomeActivity : AppCompatActivity(){
 
 
         questButton.setOnClickListener{
+
+            mediaPlayer = MediaPlayer.create(this, R.raw.clickbutton)
+            mediaPlayer?.start() // no need to call prepare(); create() does that for you
+
             val mIntent = Intent(this, QuestActivity::class.java)
             startActivity(mIntent)
+
         }
 
         quickGamebutton.setOnClickListener {
+            mediaPlayer = MediaPlayer.create(this, R.raw.clickbutton)
+            mediaPlayer?.start() // no need to call prepare(); create() does that for you
             var fm=supportFragmentManager
    showDialogMemoryRules(fm, 12, 3)
 

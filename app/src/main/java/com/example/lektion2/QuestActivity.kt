@@ -4,6 +4,7 @@ import android.R.attr.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -46,6 +47,9 @@ class QuestActivity : AppCompatActivity() {
         }
 
         homeButton.setOnClickListener {
+            mediaPlayer = MediaPlayer.create(this, R.raw.clickbutton)
+            mediaPlayer?.start() // no need to call prepare(); create() does that for you
+
             val mIntent = Intent(this, HomeActivity::class.java)
             startActivity(mIntent)
         }
