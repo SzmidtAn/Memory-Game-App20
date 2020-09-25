@@ -6,7 +6,7 @@
 
     android:layout_height="wrap_content"
     android:background="@drawable/backgrund_dialog_corner"
-    android:backgroundTint="#DFE2E4"
+
     tools:context=".HomeActivity">
 
 
@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/grid_item_corner"
+        android:background="@drawable/backgrund_dialog_corner"
+        android:backgroundTint="@color/colorAccent"
         android:padding="10dp"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"

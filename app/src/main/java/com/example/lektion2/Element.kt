@@ -7,7 +7,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.FitCenter
 
 
-class Element (var imageString: Int, var elementId:Int, var ifFind:Boolean = false,  val imageDefault: Int = R.drawable.questioncard2) {
+class Element (var imageString: Int, var elementId:Int, var ifFind:Boolean = false,  val imageDefault: Int = R.drawable.question) {
 
 
     fun turnCard(imageView: ImageView, imageString: Int) {

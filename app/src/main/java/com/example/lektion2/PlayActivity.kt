@@ -146,11 +146,11 @@ fun saveScore(context: Context, score: Int) {
     val editor = sharedPreferences.edit()
 
     if ((cardsNumToFunCheck+2) > loadAvailableLevels(context)){
-        editor.putInt("levels", (cardsNumToFunCheck+2))
+        editor.putInt("levels", (cardsNumToFunCheck + 2))
     }
 
-    if (movesInGame < loadScore(context)){
-        editor.putInt(cardsNumToFunCheck.toString(), movesInGame)
+    if (calcScore() > loadScore(context)){
+        editor.putInt(cardsNumToFunCheck.toString(), calcScore())
 
     }
 
@@ -159,7 +159,7 @@ fun saveScore(context: Context, score: Int) {
 
 fun loadScore(context: Context?): Int {
     val sharedPreferences = context?.getSharedPreferences("YOUR_PACKAGE_NAME", Context.MODE_PRIVATE)
-    return sharedPreferences?.getInt(cardsNumToFunCheck.toString(), 1000)!!
+    return sharedPreferences?.getInt(cardsNumToFunCheck.toString(), 0)!!
 }
 
 fun loadAvailableLevels(context: Context?): Int {
@@ -216,5 +216,30 @@ fun checkIfElementsSame(element1: Element, element2: Element): Boolean {
     return element1.imageString.toString() == element2.imageString.toString()
 }
 
+
+
+fun calcScore(): Int {
+
+    var time1= timeView!!.text.get(3).toString()
+    var time2= timeView!!.text.get(4).toString()
+
+    var time3=time1 + time2
+
+    println(time3)
+
+    var tilesbonus= (16 - cardsNumToFunCheck) * 20 // 20 points for each successful tile=320 pts
+    var timebonus = (45 - time3.toInt() ) * 8 // 8 points for each second = 280 pts
+    var triesbonus = (47 - movesInGame) * 10 // (deduct) 10 points for each try = 400 pts
+    if (tilesbonus < 0) {
+        tilesbonus = 0
+    }
+    if (timebonus < 0) {
+        timebonus = 0
+    }
+    if (triesbonus < 0) {
+        triesbonus = 0
+    }
+    return tilesbonus + timebonus + triesbonus
+}
 
 

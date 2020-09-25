@@ -21,7 +21,6 @@ class QuestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quest_activity)
 
-        levelTextView.text= "LEVELS"
 
 
         val listOfLevels= getListOfLevels()

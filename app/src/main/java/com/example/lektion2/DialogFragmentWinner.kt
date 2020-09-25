@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import kotlinx.android.synthetic.main.dialog_winner.*
 import kotlinx.android.synthetic.main.dialog_winner.view.*
 
 
@@ -30,10 +31,13 @@ open class DialogFragmentWinner() : DialogFragment() {
 
         var v: View? = null
 
-        var i= loadScore(context)
+        val i= loadScore(context)
 
+        val score= calcScore()
 
-        if (movesInGame == i!!.toInt()){
+        --movesInGame
+
+        if ( score == i.toInt()){
              v = activity!!.layoutInflater
                 .inflate(R.layout.dialog_winner_best_score, null)
             v.movesTextView.text= movesInGame.toString()
@@ -57,6 +61,10 @@ open class DialogFragmentWinner() : DialogFragment() {
         v.goToNextLevelButton.setOnClickListener {
             val mIntent = Intent(context, QuestActivity::class.java)
             context!!.startActivity(mIntent)        }
+
+
+        v.score2TextView.text= score.toString()
+
 
         return AlertDialog.Builder(activity)
             .setView(v)

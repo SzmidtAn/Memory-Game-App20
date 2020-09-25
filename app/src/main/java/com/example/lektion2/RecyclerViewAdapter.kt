@@ -148,7 +148,6 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
                 getViewForElements.let { it1 -> i.turnCard(it1, i.imageDefault) }
             } else if (i.ifFind){
   
-                getViewForElements.visibility=View.GONE
             }
         }
     }
