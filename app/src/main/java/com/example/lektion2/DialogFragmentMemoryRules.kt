@@ -25,8 +25,6 @@ open class DialogFragmentMemoryRules(numOfCards: Int = 12, numOfSpan: Int= 3) : 
 
     }
 
-
-
     @SuppressLint("ResourceAsColor")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -41,7 +39,6 @@ open class DialogFragmentMemoryRules(numOfCards: Int = 12, numOfSpan: Int= 3) : 
         }
 
         v.cancelImageButton.setOnClickListener {
-
             val mIntent = Intent(context, HomeActivity::class.java)
             context!!.startActivity(mIntent)
         }
