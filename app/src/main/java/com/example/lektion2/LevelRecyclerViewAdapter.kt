@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-var nextLevel: Level? =null
 class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
     RecyclerView.Adapter<LevelRecyclerViewAdapter.MyViewHolder>() {
 
@@ -49,7 +48,7 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
             mediaPlayer = MediaPlayer.create(holder.levelText.context, R.raw.clickbutton)
             mediaPlayer?.start() // no need to call prepare(); create() does that for you
 
-            level!!.cou()
+            level!!.createLevel()
             showDialogMemoryRules(fm,  level!!.numberOfCards, level!!.numberOfSpan)
         }
         }else{

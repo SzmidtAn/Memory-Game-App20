@@ -59,8 +59,12 @@ open class DialogFragmentWinner() : DialogFragment() {
         }
 
         v.goToNextLevelButton.setOnClickListener {
-            val mIntent = Intent(context, QuestActivity::class.java)
-            context!!.startActivity(mIntent)        }
+            val mIntent = Intent(context, PlayActivity::class.java)
+
+            context!!.startActivity(mIntent)
+
+
+        }
 
 
         v.score2TextView.text= score.toString()

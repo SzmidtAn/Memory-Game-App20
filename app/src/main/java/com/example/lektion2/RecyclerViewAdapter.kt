@@ -119,6 +119,13 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
                         mediaPlayer1?.start()
                         setIfFindBoolean(element1, true)
                         setIfFindBoolean(element2, true)
+
+
+                        for (i in products!!) {
+                            val getViewForElements = mRecyclerList?.findViewHolderForAdapterPosition(i.elementId)?.itemView?.imageImageView
+                            getViewForElements!!.isEnabled = true
+                        }
+
                     } else {
                         setIfFindBoolean(element1, false)
                         setIfFindBoolean(element2, false)

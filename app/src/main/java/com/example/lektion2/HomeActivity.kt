@@ -2,6 +2,7 @@ package com.example.lektion2
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
