@@ -7,10 +7,12 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.dialog_winner.view.*
 import kotlinx.android.synthetic.main.home_activity.*
+import kotlin.system.exitProcess
 
 class HomeActivity : AppCompatActivity(){
 
@@ -41,7 +43,10 @@ class HomeActivity : AppCompatActivity(){
         logo2imageView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left))
 
 
+        if (mediaPlayerBackgrundMusic == null){
+
         playBackgrundMusic()
+        }
 
     }
 
@@ -52,6 +57,20 @@ class HomeActivity : AppCompatActivity(){
 
     }
 
+
+    private var doubleBackToExitPressedOnce = false
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            stopMusic()
+            finishAffinity()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+    }
 
 
 }
@@ -65,8 +84,5 @@ fun showDialogMemoryRules(fm: FragmentManager?, numOfCards: Int, numOfSpan: Int)
 
 }
 
-fun stopMusic(){
-
-}
 
 

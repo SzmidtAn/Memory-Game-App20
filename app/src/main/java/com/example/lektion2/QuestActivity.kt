@@ -59,10 +59,7 @@ class QuestActivity : AppCompatActivity() {
 
 
 
-    override fun onBackPressed() {
-        val mIntent = Intent(this, HomeActivity::class.java)
-        startActivity(mIntent)
-    }
+
 
 
 }

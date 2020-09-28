@@ -7,6 +7,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
 import android.widget.Chronometer
 import android.widget.TextView
@@ -88,6 +89,10 @@ class PlayActivity : AppCompatActivity() {
         startTime()
 
 
+        Handler().postDelayed({
+    stopMusic()
+        }, 3000)
+
 
 
 
@@ -96,6 +101,7 @@ class PlayActivity : AppCompatActivity() {
 
 
     }
+
 
     private fun checkIfElementAlreadyExists(imageString: Int, animals: MutableList<Element>): Boolean {
         for (i in animals){

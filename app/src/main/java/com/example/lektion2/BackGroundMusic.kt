@@ -27,15 +27,26 @@ class BackGroundMusic : Service() {
 
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        onCreate()
         mediaPlayerBackgrundMusic!!.start()
         return startId
     }
 
     override fun onStart(intent: Intent, startId: Int) {}
+
+
     override fun onDestroy() {
         mediaPlayerBackgrundMusic!!.pause()
         mediaPlayerBackgrundMusic!!.release()
     }
 
     override fun onLowMemory() {}
+}
+
+fun stopMusic() {
+    if (mediaPlayerBackgrundMusic!= null) {
+        mediaPlayerBackgrundMusic!!.pause();
+        mediaPlayerBackgrundMusic!!.release();
+        mediaPlayerBackgrundMusic= null;
+    }
 }
