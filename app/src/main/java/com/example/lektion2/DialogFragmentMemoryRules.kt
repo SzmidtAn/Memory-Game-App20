@@ -38,10 +38,6 @@ open class DialogFragmentMemoryRules(numOfCards: Int = 12, numOfSpan: Int= 3) : 
             startGame()
         }
 
-        v.cancelImageButton.setOnClickListener {
-            val mIntent = Intent(context, HomeActivity::class.java)
-            context!!.startActivity(mIntent)
-        }
 
         return AlertDialog.Builder(activity)
             .setView(v)

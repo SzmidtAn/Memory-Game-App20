@@ -5,10 +5,12 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lektion2.RecyclerViewAdapter.ViewHolder
 import kotlinx.android.synthetic.main.element_recycle_view.view.*
+import kotlinx.android.synthetic.main.home_activity.*
 import kotlin.collections.ArrayList
 
 
@@ -80,10 +82,15 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
 
 
 
+
                 val context = holder.imageElement.context
 
 
+
         if (!element.ifFind) {
+
+
+
 
                 mediaPlayer = MediaPlayer.create(context, R.raw.carfli)
                 mediaPlayer?.start() // no need to call prepare(); create() does that for you

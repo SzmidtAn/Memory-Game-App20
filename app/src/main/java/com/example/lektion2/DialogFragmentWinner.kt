@@ -5,9 +5,12 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_winner.*
 import kotlinx.android.synthetic.main.dialog_winner.view.*
@@ -59,15 +62,12 @@ open class DialogFragmentWinner() : DialogFragment() {
         }
 
         v.goToNextLevelButton.setOnClickListener {
-            val mIntent = Intent(context, PlayActivity::class.java)
-
-            context!!.startActivity(mIntent)
-
-
-        }
+            val mIntent = Intent(context, QuestActivity::class.java)
+            context!!.startActivity(mIntent)        }
 
 
         v.score2TextView.text= score.toString()
+
 
 
         return AlertDialog.Builder(activity)

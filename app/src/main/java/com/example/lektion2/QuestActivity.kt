@@ -39,12 +39,7 @@ class QuestActivity : AppCompatActivity() {
 
 
 
-        backButton.setOnClickListener {
-        }
 
-
-        rightButton.setOnClickListener {
-        }
 
         homeButton.setOnClickListener {
             mediaPlayer = MediaPlayer.create(this, R.raw.clickbutton)

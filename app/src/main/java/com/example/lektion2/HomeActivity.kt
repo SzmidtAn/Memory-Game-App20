@@ -5,8 +5,11 @@ import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import kotlinx.android.synthetic.main.dialog_winner.view.*
 import kotlinx.android.synthetic.main.home_activity.*
 
 class HomeActivity : AppCompatActivity(){
@@ -35,6 +38,7 @@ class HomeActivity : AppCompatActivity(){
 
      }
 
+        logo2imageView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left))
 
 
         playBackgrundMusic()
