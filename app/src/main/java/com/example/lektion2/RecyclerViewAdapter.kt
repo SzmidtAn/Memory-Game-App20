@@ -66,6 +66,9 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
         Handler().postDelayed({
         holder.imageElement.isEnabled=true
         element.turnCard(holder.imageElement, element.imageDefault)
+            mediaPlayerBackgrundMusic?.pause()
+            mediaPlayerBackgrundMusic?.release()
+            mediaPlayerBackgrundMusic=null
 
 
     }, 3000)
@@ -95,7 +98,6 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
                 mediaPlayer?.start() // no need to call prepare(); create() does that for you
 
 
-
                 if (checkElements.size <2) {
 
 
@@ -121,10 +123,11 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
             saveElementsToCompare()
 
                     if (checkIfElementsSame(element1!!, element2!!)) {
-                        val mediaPlayer1 = MediaPlayer.create(context, R.raw.bing)
-                        mediaPlayer1?.start()
+                         mediaPlayer = MediaPlayer.create(context, R.raw.bing)
+                        mediaPlayer?.start()
                         setIfFindBoolean(element1, true)
                         setIfFindBoolean(element2, true)
+
 
 
                         for (i in products!!) {
@@ -150,7 +153,10 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
 
 
             }
-        }
+
+
+
+    }
 
 
     private fun setImageAfterChecking() {
@@ -163,6 +169,7 @@ class RecyclerViewAdapter(private val mRecyclerList: RecyclerView?, list: Mutabl
   
             }
         }
+
     }
 
     private fun setIfFindBoolean(element: Element?, b: Boolean) {

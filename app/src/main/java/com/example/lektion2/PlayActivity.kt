@@ -24,6 +24,8 @@ import kotlin.collections.ArrayList
 var fmf: FragmentManager? =null
 var textPoint: TextView? =null
 var timeView: Chronometer? =null
+var numberOfCardsToPlay: Int = 0
+var numberOfSpanToPlay: Int = 0
 
 class PlayActivity : AppCompatActivity() {
 
@@ -45,12 +47,12 @@ class PlayActivity : AppCompatActivity() {
         fmf=supportFragmentManager
 
 
-        val numberOfCardsToPlay= intent.getIntExtra("ww", 12)
-        val numberOfSpanToPlay= intent.getIntExtra("rr", 3)
+         numberOfCardsToPlay= intent.getIntExtra("ww", 12)
+         numberOfSpanToPlay= intent.getIntExtra("rr", 3)
 
         val cards=numberOfCardsToPlay/2
 
-        val animals: MutableList<Element> = ArrayList(9)
+        val items: MutableList<Element> = ArrayList(9)
         val random = Random()
         for (i in 1..cards) {
             var randomAnimal: Element = listOfElements[random.nextInt(listOfElements.size)]
@@ -58,27 +60,27 @@ class PlayActivity : AppCompatActivity() {
             var checkBoolean = false
             while (checkBoolean == false){
 
-            if (checkIfElementAlreadyExists(randomAnimal.elementId, animals) && i >1){
+            if (checkIfElementAlreadyExists(randomAnimal.elementId, items) && i >1){
             randomAnimal=  listOfElements[random.nextInt(listOfElements.size)]
-                checkIfElementAlreadyExists(randomAnimal.elementId, animals)
+                checkIfElementAlreadyExists(randomAnimal.elementId, items)
             }else{
                 checkBoolean=true
             }
 
             }
 
-            val animal = Element(randomAnimal.imageString, randomAnimal.elementId)
-            val animal2 = Element(randomAnimal.imageString, randomAnimal.elementId)
-            animals.add(animal)
-            animals.add(animal2)
+            val item = Element(randomAnimal.imageString, randomAnimal.elementId)
+            val item2 = Element(randomAnimal.imageString, randomAnimal.elementId)
+            items.add(item)
+            items.add(item2)
             checkBoolean=false
         }
 
-        shuffle(animals)
+        shuffle(items)
 
         elementsRecyclerView.apply {
             layoutManager = GridLayoutManager(this@PlayActivity, numberOfSpanToPlay)
-            adapter = RecyclerViewAdapter(elementsRecyclerView, animals, numberOfCardsToPlay)
+            adapter = RecyclerViewAdapter(elementsRecyclerView, items, numberOfCardsToPlay)
             elementsRecyclerView.isLayoutFrozen=true
         }
 
@@ -90,7 +92,7 @@ class PlayActivity : AppCompatActivity() {
 
 
         Handler().postDelayed({
-    stopMusic()
+
         }, 3000)
 
 
@@ -103,8 +105,8 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    private fun checkIfElementAlreadyExists(imageString: Int, animals: MutableList<Element>): Boolean {
-        for (i in animals){
+    private fun checkIfElementAlreadyExists(imageString: Int, items: MutableList<Element>): Boolean {
+        for (i in items){
             if (imageString == i.elementId){
                 return true
             }
@@ -144,6 +146,7 @@ fun checkIfWinner(list: MutableList<Element>, context: Context): Boolean {
 
         return true
     }
+
     return false
 }
 
@@ -208,6 +211,8 @@ public fun showDialogWinner(context: Context, fm: FragmentManager?) {
     mediaPlayer?.start() // no need to call prepare(); create() does that for you
 
 
+
+
     fm?.let { dialogfragm.show(it, "fef") }
 
 }
@@ -219,6 +224,7 @@ private fun startTime() {
 
 
 fun checkIfElementsSame(element1: Element, element2: Element): Boolean {
+
     return element1.imageString.toString() == element2.imageString.toString()
 }
 
@@ -249,3 +255,11 @@ fun calcScore(): Int {
 }
 
 
+ fun startGame(context: Context, numOfCards: Int, numOfSpan: Int) {
+    movesInGame=0
+
+    val mIntent = Intent(context, PlayActivity::class.java)
+    mIntent.putExtra("ww", numOfCards)
+    mIntent.putExtra("rr", numOfSpan)
+    context!!.startActivity(mIntent)
+}

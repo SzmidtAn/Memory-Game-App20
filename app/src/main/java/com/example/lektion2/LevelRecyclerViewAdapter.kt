@@ -1,6 +1,7 @@
 package com.example.lektion2
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
@@ -48,8 +49,13 @@ class LevelRecyclerViewAdapter(private val myDataset: MutableList<Level>?) :
             mediaPlayer = MediaPlayer.create(holder.levelText.context, R.raw.clickbutton)
             mediaPlayer?.start() // no need to call prepare(); create() does that for you
 
-            level!!.createLevel()
+
+
+            if (level.level==1){
             showDialogMemoryRules(fm,  level!!.numberOfCards, level!!.numberOfSpan)
+            }else{
+                startGame(holder.itemView.context, level!!.numberOfCards, level!!.numberOfSpan)
+            }
         }
         }else{
             holder.levelText.setBackgroundColor(R.color.colorPrimary)

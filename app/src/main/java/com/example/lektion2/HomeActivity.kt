@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.view.KeyEvent
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,13 @@ class HomeActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
+            var fm=supportFragmentManager
+
+        settingsButton.visibility=View.GONE
+
+        settingsButton.setOnClickListener{
+            showDialogSettings(fm)
+        }
 
         questButton.setOnClickListener{
 
@@ -35,7 +44,6 @@ class HomeActivity : AppCompatActivity(){
         quickGamebutton.setOnClickListener {
             mediaPlayer = MediaPlayer.create(this, R.raw.clickbutton)
             mediaPlayer?.start() // no need to call prepare(); create() does that for you
-            var fm=supportFragmentManager
    showDialogMemoryRules(fm, 12, 3)
 
      }
@@ -50,12 +58,16 @@ class HomeActivity : AppCompatActivity(){
 
     }
 
+
     fun playBackgrundMusic() {
 
-        val intent = Intent(this, BackGroundMusic::class.java)
-        startService(intent)
+        mediaPlayerBackgrundMusic = MediaPlayer.create(this, R.raw.home)
+        mediaPlayerBackgrundMusic?.isLooping=true
+        mediaPlayerBackgrundMusic?.start()
 
     }
+
+
 
 
     private var doubleBackToExitPressedOnce = false
@@ -68,7 +80,6 @@ class HomeActivity : AppCompatActivity(){
 
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
-
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 
@@ -79,6 +90,14 @@ class HomeActivity : AppCompatActivity(){
 
 fun showDialogMemoryRules(fm: FragmentManager?, numOfCards: Int, numOfSpan: Int) {
     var dialogfragm=DialogFragmentMemoryRules(numOfCards, numOfSpan)
+
+    fm?.let { dialogfragm.show(it, "fef") }
+
+}
+
+
+fun showDialogSettings(fm: FragmentManager?) {
+    var dialogfragm=DialogFragmentSettings()
 
     fm?.let { dialogfragm.show(it, "fef") }
 

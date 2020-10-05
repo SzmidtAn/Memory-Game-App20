@@ -3,6 +3,7 @@ package com.example.lektion2
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -62,8 +63,10 @@ open class DialogFragmentWinner() : DialogFragment() {
         }
 
         v.goToNextLevelButton.setOnClickListener {
-            val mIntent = Intent(context, QuestActivity::class.java)
-            context!!.startActivity(mIntent)        }
+            var level: Level? = null
+         level=   getListOfLevels().find { level -> level.numberOfCards == numberOfCardsToPlay+2 }
+            context?.let { it1 -> startGame(it1, level!!.numberOfCards, level.numberOfSpan) }
+        }
 
 
         v.score2TextView.text= score.toString()
